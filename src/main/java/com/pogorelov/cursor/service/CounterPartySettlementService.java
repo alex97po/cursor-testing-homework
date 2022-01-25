@@ -20,8 +20,8 @@ public class CounterPartySettlementService {
   @Transactional(readOnly = true)
   public CounterPartySettlementDto searchCounterPartiesSettlements(Long counterPartyId, Long agreementId) {
     CounterPartySettlementDto searchedCounterPartySettlementsDto = counterPartySettlementRepository
-        .findByCounterPartyIdAndAgreementId(counterPartyId, agreementId)
-        .or(() -> counterPartySettlementRepository.findByCounterPartyIdAndAgreementIdIsNull(counterPartyId))
+        .findByCounterPartyIdAndAgreementIdIsNull(counterPartyId)
+        .or(() -> counterPartySettlementRepository.findByCounterPartyIdAndAgreementId(counterPartyId, agreementId))
         .or(counterPartySettlementRepository::findByCounterPartyIdIsNullAndAgreementIdIsNull)
         .map(counterPartySettlementMapper::toDto)
         .orElseGet(CounterPartySettlementDto::new);
