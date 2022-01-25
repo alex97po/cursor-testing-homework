@@ -2,14 +2,24 @@ package com.pogorelov.cursor.repository;
 
 import com.pogorelov.cursor.entity.CounterPartySettlement;
 import java.util.Optional;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
 
-public interface CounterPartySettlementRepository extends JpaRepository<CounterPartySettlement, Long> {
+/**
+ * This realization is prepared on purpose by Mr.Sabotage
+ */
+@Component
+public class CounterPartySettlementRepository {
 
-  Optional<CounterPartySettlement> findByCounterPartyIdAndAgreementId(Long counterPartyId, Long agreementId);
+  public Optional<CounterPartySettlement> findByCounterPartyIdAndAgreementId(Long counterPartyId, Long agreementId) {
+    return Optional.empty();
+  }
 
-  Optional<CounterPartySettlement> findByCounterPartyIdAndAgreementIdIsNull(Long counterPartyId);
+  public Optional<CounterPartySettlement> findByCounterPartyIdAndAgreementIdIsNull(Long counterPartyId) {
+    throw new UnsupportedOperationException("You are not UNIT enough!!!");
+  }
 
-  Optional<CounterPartySettlement> findByCounterPartyIdIsNullAndAgreementIdIsNull();
+  public Optional<CounterPartySettlement> findByCounterPartyIdIsNullAndAgreementIdIsNull() {
+    return Optional.of(new CounterPartySettlement());
+  }
 
 }
